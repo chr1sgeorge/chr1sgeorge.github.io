@@ -44,13 +44,13 @@
             font-style: normal;
         }
 
-        @keyframes text-flicker {
-            0% { opacity: 0.98; }
-            50% { opacity: 0.995; }
-            100% { opacity: 0.98; }
+        /* KEYFRAME ANIMATIONS */
+        @keyframes subtle-pulse {
+            0%, 100% { box-shadow: 0 0 clamp(10px, 2vmin, 20px) rgba(138, 255, 255, 0.2), inset 0 0 clamp(30px, 6vmin, 100px) rgba(0, 0, 0, 0.95); }
+            50% { box-shadow: 0 0 clamp(20px, 4vmin, 40px) rgba(138, 255, 255, 0.4), inset 0 0 clamp(30px, 6vmin, 100px) rgba(0, 0, 0, 0.95); }
         }
 
-        /* RESET & BASE - NO SCROLL */
+        /* RESET & BASE - SCROLLING DISABLED */
         * {
             margin: 0;
             padding: 0;
@@ -58,92 +58,70 @@
             box-sizing: border-box;
         }
         html, body {
-            height: 100vh;
+            height: 100vh; /* Locked to exact screen height */
             width: 100vw;
-            overflow: hidden;
-            background-color: #000000; /* Pure black outer background */
+            overflow: hidden; /* Prevents scrollbars */
         }
         body {
+            background-color: #02040a;
+            background-image: radial-gradient(circle at center, #050a1f 0%, #010205 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: clamp(10px, 3vmin, 40px);
+            padding: clamp(10px, 2.5vmin, 30px); /* Acts as the physical monitor bezel */
             -webkit-text-size-adjust: none;
         }
 
-        /* THE PHYSICAL CRT MONITOR CONTAINER */
-        .crt-monitor {
-            position: relative;
+        /* OUTER BBS TERMINAL MARQUEE & INNER CRT SCREEN */
+        .crt-frame {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 1 !important;
+            visibility: visible !important;
+            position: relative !important;
+            
+            /* Expands to fill the device browser perfectly */
             width: 100%;
-            max-width: 1100px;
-            height: 92vh;
-            background-color: #030406; /* Pitch black CRT background */
-            /* Curved Elliptical TV corners */
-            border-radius: clamp(30px, 10vmin, 80px) / clamp(20px, 6vmin, 50px);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* Lock to 4:3 Boxy Aspect Ratio on Desktop to prevent stretching */
-        @media (min-width: 768px) {
-            .crt-monitor {
-                height: auto;
-                aspect-ratio: 4 / 3;
-                max-height: 92vh;
-            }
-        }
-
-        /* THE SHARP GREEN CRT TUBE BORDER (Reference Image Match) */
-        .crt-monitor::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            /* Sharp green outer line fading into a heavy black inner vignette */
-            box-shadow: 
-                inset 0 0 0 clamp(1px, 0.3vmin, 3px) rgba(0, 255, 60, 1), /* The ultra-thin sharp green edge */
-                inset 0 0 clamp(8px, 1.5vmin, 16px) rgba(0, 255, 60, 0.4), /* Subtle green outer glow */
-                inset 0 0 clamp(60px, 12vmin, 200px) clamp(20px, 5vmin, 80px) rgba(0, 0, 0, 0.98); /* Heavy black inner shadow */
-            pointer-events: none;
-            z-index: 10; /* Keeps the heavy dark vignette OVER the text edges */
-        }
-
-        /* HEAVY SCANLINES & GLASS REFLECTION */
-        .crt-monitor::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            background: 
-                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.55) 50%), /* Hard scanlines */
-                radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 60%); /* Subtle glass bulb reflection */
-            background-size: 100% 3px, 100% 100%;
-            pointer-events: none;
-            z-index: 4; /* Scanlines sit strictly BELOW the text now */
-        }
-
-        /* INNER CONTENT WRAPPER - Fixed fading by moving above scanlines */
-        .screen-content {
-            position: relative;
-            z-index: 5; /* This ensures the text pops over the scanlines */
-            padding: clamp(30px, 8vmin, 90px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             height: 100%;
-            animation: text-flicker 0.15s infinite;
+            max-width: 1600px; 
+            
+            background-color: #06134a;
+            background-image: radial-gradient(circle at center, #0a217a 0%, #05103a 75%, #02071e 100%);
+            border-radius: clamp(12px, 3vmin, 30px);
+            padding: clamp(20px, 5vmin, 60px) clamp(20px, 6vmin, 80px);
+            
+            /* Classic BBS Double-Line Glow Border */
+            border: clamp(6px, 1.5vmin, 18px) double #8affff;
+            animation: subtle-pulse 4s infinite ease-in-out;
         }
 
-        /* TYPOGRAPHY - Chromatic Aberration for Curved Glass Effect */
+        /* Subtle CRT Scanlines & Tube Vignette */
+        .crt-frame::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: clamp(6px, 2.5vmin, 20px);
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
+                radial-gradient(circle at center, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+            background-size: 100% 4px, 100% 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* TYPOGRAPHY & COLORS */
         header, h1, h2, blockquote, ul, li, footer {
             font-family: "C64 User Mono", "Press Start 2P", "VT323", monospace;
             font-weight: normal;
             text-transform: uppercase;
-            font-size: clamp(0.5rem, 2.2vmin, 1.6rem);
-            line-height: 1.45;
-            letter-spacing: 0.03em;
+            position: relative;
+            z-index: 6;
+            
+            /* Significantly larger max font size to fill desktop monitors */
+            font-size: clamp(0.5rem, 2.4vmin, 1.8rem);
+            line-height: 1.4;
+            letter-spacing: 0.02em;
         }
 
         header:before, h1:after {
@@ -154,10 +132,7 @@
         /* Top Boot Banner */
         header {
             color: #ff8c3b;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.7),
-                2px 0 1px rgba(0, 150, 255, 0.7),
-                0 0 10px rgba(255, 110, 30, 0.7);
+            text-shadow: 0 0 8px rgba(255, 110, 30, 0.85), 0 0 16px rgba(255, 60, 0, 0.5);
             text-align: center;
             margin-bottom: clamp(0.8rem, 3vmin, 2rem);
         }
@@ -168,10 +143,7 @@
         /* Title */
         h1 {
             color: #ff9d3b;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.7),
-                2px 0 1px rgba(0, 150, 255, 0.7),
-                0 0 10px rgba(255, 140, 40, 0.7);
+            text-shadow: 0 0 8px rgba(255, 140, 40, 0.85), 0 0 14px rgba(255, 80, 0, 0.45);
         }
         h1:after {
             content: "------------";
@@ -182,18 +154,12 @@
         /* Subtitle & Quote */
         h2 {
             color: #8affff;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.5),
-                2px 0 1px rgba(0, 100, 255, 0.7),
-                0 0 10px rgba(100, 255, 255, 0.7);
+            text-shadow: 0 0 8px rgba(100, 255, 255, 0.85), 0 0 16px rgba(0, 210, 255, 0.55);
             margin-top: 0;
         }
         blockquote {
             color: #8affff;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.5),
-                2px 0 1px rgba(0, 100, 255, 0.7),
-                0 0 10px rgba(100, 255, 255, 0.7);
+            text-shadow: 0 0 8px rgba(100, 255, 255, 0.85), 0 0 16px rgba(0, 210, 255, 0.55);
             margin: 0 0 clamp(1rem, 3.5vmin, 2.5rem) 0;
             max-width: 55ch;
         }
@@ -208,10 +174,7 @@
         }
         li {
             color: #ffe14d;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.6),
-                2px 0 1px rgba(0, 150, 255, 0.6),
-                0 0 10px rgba(255, 215, 40, 0.7);
+            text-shadow: 0 0 8px rgba(255, 215, 40, 0.85), 0 0 14px rgba(255, 160, 0, 0.45);
             white-space: nowrap;
         }
         li:nth-child(1):before { content: "[C]:"; }
@@ -231,7 +194,7 @@
         }
         a:hover {
             color: #ffffff;
-            text-shadow: 0 0 12px #ffffff, 0 0 24px #ffe14d;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffe14d;
             padding-left: 8px;
         }
 
@@ -241,10 +204,8 @@
             justify-content: space-between;
             align-items: flex-end;
             color: #ffe14d;
-            text-shadow: 
-                -2px 0 1px rgba(255, 0, 0, 0.6),
-                2px 0 1px rgba(0, 150, 255, 0.6),
-                0 0 10px rgba(255, 215, 40, 0.7);
+            text-shadow: 0 0 8px rgba(255, 215, 40, 0.85), 0 0 14px rgba(255, 160, 0, 0.45);
+            opacity: 1 !important;
         }
         footer:before {
             content: "?SYNTAX ERROR /\A READY.";
@@ -254,60 +215,73 @@
         footer img {
             display: block;
             margin: 0;
-            width: clamp(70px, 13vmin, 150px);
+            width: clamp(70px, 14vmin, 160px);
             height: auto;
             filter: drop-shadow(0 0 6px rgba(138, 255, 255, 0.4));
         }
 
         ::selection {
-            background: #00ff3c;
-            color: #000000;
+            background: #ff8c3b;
+            color: #02071e;
             text-shadow: none;
         }
         ::-moz-selection {
-            background: #00ff3c;
-            color: #000000;
+            background: #ff8c3b;
+            color: #02071e;
             text-shadow: none;
         }
     </style>
 </head>
 <body>
-    <div class="crt-monitor">
-        <div class="screen-content">
-            <header></header>
-            <h1>CHRIS GEORGE</h1>
-            <h2>FOR THE LULZ</h2>
-            <blockquote>
-                &ldquo;I have found that all ugly things are made by those who strive to make something beautiful, and that all beautiful things are made by those who strive to make something useful.&rdquo;
-            </blockquote>
-            <ul>
-                <li><a href="https://chr1sgeorge.github.io/clickme/" accesskey="c">CLICK ME</a></li>
-                <li><a href="https://chr1sgeorge.github.io/offsocial/" accesskey="o">OFF-SOCIAL</a></li>
-                <li><a href="https://chr1sgeorge.github.io/music-archive/" accesskey="m">MUSIC-ARCHIVE</a></li>
-                <li><a href="https://chr1sgeorge.github.io/media-archive/" accesskey="f">FILM-ARCHIVE</a></li>
-                <li><a href="https://chr1sgeorge.github.io/pgp" accesskey="p">PGP</a></li>
-                <li><a href="mailto:r34lcg@gmail.com" accesskey="e">E-MAIL</a></li>
-                <li><a href="https://chr1sgeorge.github.io/spotify/" accesskey="s">SPOTIFY</a></li>
-                <li><a href="https://chr1sgeorge.github.io/watch-log/" accesskey="w">WATCH-LOG</a></li>
-            </ul>
-            <footer>
-                <img src="notepad.gif" alt="Created with Notepad" width="150">
-            </footer>
-        </div>
+    <div class="crt-frame">
+        <header></header>
+        <h1>CHRIS GEORGE</h1>
+        <h2>FOR THE LULZ</h2>
+        <blockquote>
+            &ldquo;I have found that all ugly things are made by those who strive to make something beautiful, and that all beautiful things are made by those who strive to make something useful.&rdquo;
+        </blockquote>
+        <ul>
+            <li><a href="https://chr1sgeorge.github.io/clickme/" accesskey="c">CLICK ME</a></li>
+            <li><a href="https://chr1sgeorge.github.io/offsocial/" accesskey="o">OFF-SOCIAL</a></li>
+            <li><a href="https://chr1sgeorge.github.io/music-archive/" accesskey="m">MUSIC-ARCHIVE</a></li>
+            <li><a href="https://chr1sgeorge.github.io/media-archive/" accesskey="f">FILM-ARCHIVE</a></li>
+            <li><a href="https://chr1sgeorge.github.io/pgp" accesskey="p">PGP</a></li>
+            <li><a href="mailto:r34lcg@gmail.com" accesskey="e">E-MAIL</a></li>
+            <li><a href="https://chr1sgeorge.github.io/spotify/" accesskey="s">SPOTIFY</a></li>
+            <li><a href="https://chr1sgeorge.github.io/watch-log/" accesskey="w">WATCH-LOG</a></li>
+        </ul>
+        <footer>
+            <img src="notepad.gif" alt="Created with Notepad" width="150">
+        </footer>
     </div>
 
     <script>
         document.addEventListener("keyup", function(event) {
             var code = (event.keyCode ? event.keyCode : event.which);
-            
-            if (code == 67) window.location = "https://chr1sgeorge.github.io/clickme";
-            if (code == 79 || code == 111) window.location = "https://chr1sgeorge.github.io/offsocial/";
-            if (code == 77 || code == 109) window.location = "https://chr1sgeorge.github.io/music-archive/";
-            if (code == 80) window.location = "https://chr1sgeorge.github.io/pgp";
-            if (code == 69 || code == 101) window.location = "mailto:r34lcg@gmail.com";
-            if (code == 83) window.location = "https://chr1sgeorge.github.io/spotify/";
-            if (code == 70) window.location = "https://chr1sgeorge.github.io/media-archive";
-            if (code == 87) window.location = "https://chr1sgeorge.github.io/watch-log";
+            if (code == 67) {  // 'C' or 'c'
+                window.location = "https://chr1sgeorge.github.io/clickme";
+            }
+            if (code == 79 || code == 111) {  // 'O' or 'o'
+                window.location = "https://chr1sgeorge.github.io/offsocial/";
+            }
+            if (code == 77 || code == 109) {  // 'M' or 'm'
+                window.location = "https://chr1sgeorge.github.io/music-archive/";
+            }
+            if (code == 80) {  // 'P' or 'p'
+                window.location = "https://chr1sgeorge.github.io/pgp";
+            }
+            if (code == 69 || code == 101) {  // 'E' or 'e'
+                window.location = "mailto:r34lcg@gmail.com";
+            }
+            if (code == 83) {  // 'S' or 's'
+                window.location = "https://chr1sgeorge.github.io/spotify/";
+            }
+            if (code == 70) {  // 'F' or 'f'
+                window.location = "https://chr1sgeorge.github.io/media-archive";
+            }
+            if (code == 87) {  // 'W' or 'w'
+                window.location = "https://chr1sgeorge.github.io/watch-log";
+            }
         });
     </script>
 </body>
