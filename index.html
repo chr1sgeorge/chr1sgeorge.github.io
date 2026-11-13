@@ -2,332 +2,369 @@
 <html lang="en">
 <head>
     <title>CHRIS 🌐</title>
-	  <meta name="description" content="CG">
-  	  <link rel="stylesheet" href="css/index.css">  <meta property="og:title" content="CG">
-	  <meta property="og:type" content="website">
-      <meta property="og:url" content="https://chr1sgeorge.github.io">
-      <meta property="og:image" content="https://raw.githubusercontent.com/chr1sgeorge/chr1sgeorge.github.io/refs/heads/main/images/cover.jpg">
-      <meta property="og:description" content="for the lulz">
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CG">
+    <meta property="og:title" content="CG">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chr1sgeorge.github.io">
+    <meta property="og:image" content="https://raw.githubusercontent.com/chr1sgeorge/chr1sgeorge.github.io/refs/heads/main/images/cover.jpg">
+    <meta property="og:description" content="for the lulz">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
-
-	
     <style type="text/css" media="print">
-        blockquote {
-            font-style: italic;
-        }
-        cite {
-            font-style: normal;
-            display: inline;
-        }
-        a {
-            color: black;
-            text-decoration: none;
-li:nth-child(1)::after {
-    content: " — https://chr1sgeorge.github.io/clickme/";
-}
-li:nth-child(2)::after {
-    content: " — https://chr1sgeorge.github.io/offsocial/";
-}
-li:nth-child(3)::after {
-    content: " — https://chr1sgeorge.github.io/music-archive/";
-}
-li:nth-child(4)::after {
-    content: " — https://chr1sgeorge.github.io/film-archive/";
-}
-li:nth-child(5)::after {
-    content: " — https://chr1sgeorge.github.io/pgp";
-}
-li:nth-child(6)::after {
-    content: " — mailto:r34lcg@gmail.com";
-}
-li:nth-child(7)::after {
-    content: " — https://chr1sgeorge.github.io/spotify";
-}
-li:nth-child(8)::after {
-    content: " — https://chr1sgeorge.github.io/watch-log";
-}
-li:nth-child(9)::after {
-    content: " — https://telegram.me/thet0rrentbot";
-}
-
+        blockquote { font-style: italic; }
+        cite { font-style: normal; display: inline; }
+        a { color: black; text-decoration: none; }
+        li:nth-child(1)::after { content: " — https://chr1sgeorge.github.io/clickme/"; }
+        li:nth-child(2)::after { content: " — https://chr1sgeorge.github.io/offsocial/"; }
+        li:nth-child(3)::after { content: " — https://chr1sgeorge.github.io/music-archive/"; }
+        li:nth-child(4)::after { content: " — https://chr1sgeorge.github.io/film-archive/"; }
+        li:nth-child(5)::after { content: " — https://chr1sgeorge.github.io/pgp"; }
+        li:nth-child(6)::after { content: " — mailto:r34lcg@gmail.com"; }
+        li:nth-child(7)::after { content: " — https://chr1sgeorge.github.io/spotify"; }
+        li:nth-child(8)::after { content: " — https://chr1sgeorge.github.io/watch-log"; }
+        li:nth-child(9)::after { content: " — https://telegram.me/thet0rrentbot"; }
     </style>
-    <style type="text/css" media="screen">
+
+    <style type="text/css">
         /* FONT SOURCE */
         @font-face {
             font-family: "C64 User Mono";
             src: url("fonts/C64_Pro_Mono-STYLE.eot");
             src: url("fonts/C64_Pro_Mono-STYLE.eot?#iefix") format("embedded-opentype"),
-            url("fonts/C64_Pro_Mono-STYLE.woff") format("woff"),
-            url("fonts/C64_Pro_Mono-STYLE.ttf") format("truetype");
+                 url("fonts/C64_Pro_Mono-STYLE.woff") format("woff"),
+                 url("fonts/C64_Pro_Mono-STYLE.ttf") format("truetype"),
+                 url("C64_Pro_Mono-STYLE.woff") format("woff"),
+                 url("C64_Pro_Mono-STYLE.ttf") format("truetype"),
+                 url("C64_Pro_Mono-STYLE.otf") format("opentype");
             font-weight: normal;
             font-style: normal;
         }
-        /* KEYFRAME ANIMATIONS DEFINITION */
-        @-webkit-keyframes show {
-            from { opacity: 0; }
-            to { opacity: 1; }
+
+        @keyframes text-flicker {
+            0% { opacity: 0.985; }
+            50% { opacity: 1; }
+            100% { opacity: 0.985; }
         }
-        @keyframes show {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @-webkit-keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        /* RESPONSIVE INDEPENDENT STYLING */
+
+        /* RESET & BASE - LOCKED NON-SCROLLABLE VIEWPORT */
         * {
             margin: 0;
             padding: 0;
             border: 0;
+            box-sizing: border-box;
         }
         html, body {
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            background-color: #000000;
         }
         body {
-            background-color: #6076c5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(8px, 2.5vmin, 32px);
             -webkit-text-size-adjust: none;
         }
-        div {
-            background-color: #1a2e71;
-            box-sizing: border-box;
-            border-style: solid;
-            border-color: #6076c5;
+
+        /* SVG DEFINITION HOLDER */
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+            pointer-events: none;
         }
+
+        /* CURVED BARREL CRT MONITOR CONTAINER */
+        .crt-monitor {
+            position: relative;
+            width: 100%;
+            max-width: 1120px;
+            height: 100%;
+            max-height: 94dvh;
+            
+            /* Classic CRT Blue Center fading into dark tube edges */
+            background-color: #06134a;
+            background-image: radial-gradient(
+                ellipse at 50% 48%, 
+                #102fa3 0%, 
+                #081961 52%, 
+                #030929 84%, 
+                #010208 100%
+            );
+
+            /* True Barrel Distortion Clip Path (works on both Phone & PC aspect ratios) */
+            -webkit-clip-path: url(#crt-barrel-clip);
+            clip-path: url(#crt-barrel-clip);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* 4:3 TV Aspect Ratio on Desktop/Landscape */
+        @media (min-width: 768px) and (orientation: landscape) {
+            .crt-monitor {
+                height: auto;
+                aspect-ratio: 4 / 3;
+                max-height: 92dvh;
+            }
+        }
+
+        /* CURVED GREEN CRT TUBE BORDER OVERLAY */
+        .crt-bezel-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            filter: drop-shadow(0 0 6px rgba(0, 255, 65, 0.75));
+        }
+
+        /* DARK EDGE VIGNETTE & CURVED GLASS REFLECTION */
+        .crt-monitor::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.55) 85%, rgba(0, 0, 0, 0.94) 100%),
+                radial-gradient(ellipse at 50% 14%, rgba(160, 220, 255, 0.09) 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 8;
+        }
+
+        /* CRT SCANLINES (Sits BELOW text so text stays bright and crisp) */
+        .crt-monitor::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.36) 50%);
+            background-size: 100% 3px;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        /* INNER CONTENT WRAPPER */
+        .screen-content {
+            position: relative;
+            z-index: 6;
+            /* Safe padding inside the curved barrel corners for both phone & PC */
+            padding: clamp(26px, 6.5vmin, 78px) clamp(24px, 7.5vmin, 92px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            animation: text-flicker 0.16s infinite;
+        }
+
+        /* TYPOGRAPHY & CURVED GLASS CHROMATIC ABERRATION */
         header, h1, h2, blockquote, ul, li, footer {
-            font-family: "C64 User Mono", monospace;
-            line-height: 1.2;
+            font-family: "C64 User Mono", "Press Start 2P", "VT323", monospace;
             font-weight: normal;
-            color: #6a94c9;
             text-transform: uppercase;
+            /* Scales proportionally to both screen height and width so nothing wraps or overflows */
+            font-size: clamp(0.5rem, min(2.05vh, 2.35vw), 1.45rem);
+            line-height: 1.42;
+            letter-spacing: 0.02em;
         }
-        header:before, header:after, h1:after, footer:before, footer:after {
+
+        header:before, h1:after {
             white-space: pre;
             display: block;
         }
-        header:before {
+
+        /* Top Boot Banner - Slightly bowed upward to echo the top TV curve */
+        header {
+            color: #ff9442;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 0, 40, 0.65),
+                1.5px 0 1px rgba(0, 180, 255, 0.65),
+                0 0 10px rgba(255, 115, 30, 0.8);
             text-align: center;
+            margin-bottom: clamp(0.7rem, 2.6vmin, 1.8rem);
+            transform: perspective(600px) rotateX(6deg);
         }
-        header:after {
-            content: "\A Ready. \A\A\A";
+        header:before {
+            content: "**** FREE THE INTERNET **** /\A\A 64K RAM SYSTEM  38911  COMMODORE 64 BASIC V2";
+        }
+
+        /* Title */
+        h1 {
+            color: #ffa347;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 0, 40, 0.65),
+                1.5px 0 1px rgba(0, 180, 255, 0.65),
+                0 0 10px rgba(255, 140, 40, 0.8);
         }
         h1:after {
-            content: "-------------";
+            content: "------------";
+            color: #ffa347;
+            margin-bottom: clamp(0.2rem, 1.2vmin, 0.5rem);
         }
+
+        /* Subtitle & Quote */
         h2 {
-            margin-top: 1.2rem;
+            color: #94ffff;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 0, 60, 0.45),
+                1.5px 0 1px rgba(0, 140, 255, 0.7),
+                0 0 10px rgba(100, 255, 255, 0.8);
+            margin-top: 0;
         }
         blockquote {
-            margin: 1.2rem 0;
+            color: #94ffff;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 0, 60, 0.45),
+                1.5px 0 1px rgba(0, 140, 255, 0.7),
+                0 0 10px rgba(100, 255, 255, 0.8);
+            margin: 0 0 clamp(0.8rem, 3vmin, 2.1rem) 0;
+            max-width: 55ch;
         }
-        cite {
-            font-style: normal;
-        }
-        cite:before {
-            content: "-";
-        }
-        span {
-            display: none;
-        }
+
+        /* 1-Column Navigation Menu */
         ul {
             list-style: none;
-		}
-        li:nth-child(1):before {
-            content: "[C]:";
+            display: flex;
+            flex-direction: column; 
+            gap: clamp(0.18em, 0.9vmin, 0.38em); 
+            margin-bottom: clamp(0.8rem, 3vmin, 2.1rem);
         }
-        li:nth-child(2):before {
-            content: "[O]:";
+        li {
+            color: #ffe45e;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 20, 0, 0.55),
+                1.5px 0 1px rgba(0, 170, 255, 0.55),
+                0 0 10px rgba(255, 215, 40, 0.8);
+            white-space: nowrap;
         }
-        li:nth-child(3):before {
-            content: "[M]:";
-        }
-        li:nth-child(4):before {
-            content: "[F]:";
-        }
-		li:nth-child(5):before {
-            content: "[P]:";
-        }
-		li:nth-child(6):before {
-            content: "[E]:";
-        }
-		li:nth-child(7):before {
-            content: "[S]:";
-        }
-		li:nth-child(8):before {
-            content: "[W]:";
-        }
-		li:nth-child(9):before {
-            content: "[T]:";
-        }
+        li:nth-child(1):before { content: "[C]:"; }
+        li:nth-child(2):before { content: "[O]:"; }
+        li:nth-child(3):before { content: "[M]:"; }
+        li:nth-child(4):before { content: "[F]:"; }
+        li:nth-child(5):before { content: "[P]:"; }
+        li:nth-child(6):before { content: "[E]:"; }
+        li:nth-child(7):before { content: "[S]:"; }
+        li:nth-child(8):before { content: "[W]:"; }
+        li:nth-child(9):before { content: "[T]:"; }
+
         a {
-            color: #6a94c9;
+            color: #ffe45e;
             text-decoration: none;
+            transition: color 0.15s ease, text-shadow 0.15s ease, padding-left 0.15s ease;
         }
         a:hover {
-            color: #ddd;
+            color: #ffffff;
+            text-shadow: 0 0 12px #ffffff, 0 0 24px #ffe45e;
+            padding-left: 8px;
         }
-	    
-	footer img {
-	    margin-top: 20px;
-            align: bottom:
-            display: block;
-            margin: 0 auto;
-            max-width: 100px; /* Adjust size as needed */
-        }
-    
+
+        /* Footer - Slightly bowed downward to echo the bottom TV curve */
         footer {
-            opacity:0;
-            -webkit-animation: show 1.5s step-end 1 forwards;
-            animation: show 1.5s step-end 1 forwards;
+            display: flex !important;
+            justify-content: space-between;
+            align-items: flex-end;
+            color: #ffe45e;
+            text-shadow: 
+                -1.5px 0 1px rgba(255, 20, 0, 0.55),
+                1.5px 0 1px rgba(0, 170, 255, 0.55),
+                0 0 10px rgba(255, 215, 40, 0.8);
+            transform: perspective(600px) rotateX(-5deg);
         }
         footer:before {
-            content: "\A\A ?Syntax Error \A Ready. \A";
+            content: "?SYNTAX ERROR /\A READY.";
+            white-space: pre;
+            display: block;
         }
-        footer:after {
-            -webkit-animation: blink 1s step-end infinite;
-            animation: blink 1s step-end infinite;
-            content: "\258C";
+        footer img {
+            display: block;
+            margin: 0;
+            width: clamp(64px, 12vmin, 140px);
+            height: auto;
+            filter: drop-shadow(0 0 6px rgba(138, 255, 255, 0.45));
         }
+
         ::selection {
-            background: none;
-            color: transparent;
+            background: #00ff3c;
+            color: #02071e;
             text-shadow: none;
         }
         ::-moz-selection {
-            background: #6076c5;
-            color: #20398d;
+            background: #00ff3c;
+            color: #02071e;
             text-shadow: none;
-        }
-        /* RESPONSIVE DEFAULT STYLING */
-        div {
-            border-width: 0.5rem;
-            min-height: 100%;
-        }
-        header, h1, h2, blockquote, li, footer {
-            font-size: 0.7rem;
-        }
-        header:before {
-            content: "\A Commodore 64 Basic v2 \A 64K RAM system \A 38911 Basic bytes free \A";
-        }
-        cite {
-            display: block;
-            white-space: normal;
-        }
-        footer:after {
-            font-size: 1rem;
-        }
-        /* RESPONSIVE DEPENDENT STYLING */
-        @media screen and (min-width: 23.33rem) {
-            div {
-                border-width: 0.75rem;
-            }
-            header, h1, h2, blockquote, li, footer {
-                font-size: 0.75rem;
-            }
-            cite {
-                display: inline;
-                white-space: nowrap;
-            }
-            footer:after {
-                font-size: 1.1rem;
-            }
-        }
-        @media screen and (min-width: 32.5rem) {
-            div {
-                border-width: 2rem;
-            }
-            header:before {
-                content: "\A **** Free The Internet **** \A\A  64K RAM system  38911  Commodore 64 Basic v2 \A";
-            }
-        }
-        @media screen and (min-width: 45.5rem) {
-            header, h1, h2, blockquote, li, footer {
-                font-size: 1rem;
-            }
-            footer:after {
-                font-size: 1.5rem;
-            }
-        }
-        @media screen and (min-width: 53.5rem) {
-            div {
-                margin: 0 auto;
-                border-width: 5rem;
-                max-width: 74rem;
-            }
-        }
-        @media screen and (min-width: 74rem) and (min-height: 48rem) {
-            div {
-                position: absolute;
-                min-height: 48rem;
-                top: 50%;
-                left: 50%;
-                margin-left: -37rem;
-                margin-top: -24rem;
-            }
         }
     </style>
 </head>
 <body>
-    <div>
-        <header></header>
-        <h1>CHRIS GEORGE</h1>
-        <h2>FOR THE LULZ</h2>
-        <blockquote>
-            &ldquo;I have found that all ugly things are made by those who strive to make something beautiful, and that all beautiful things are made by those who strive to make something useful.&rdquo;
-        </blockquote>
-        <ul>
-		<li><a href="https://chr1sgeorge.github.io/clickme/" accesskey="c">CLICK ME</a></li>
-	    <li><a href="https://chr1sgeorge.github.io/offsocial/" accesskey="o">OFF-SOCIAL</a></li>
-        <li><a href="https://chr1sgeorge.github.io/music-archive/" accesskey="m">MUSIC-ARCHIVE</a></li>
-        <li><a href="https://chr1sgeorge.github.io/media-archive/" accesskey="f">FILM-ARCHIVE</a></li>
-        <li><a href="https://chr1sgeorge.github.io/pgp" accesskey="p">PGP</a></li>
-	    <li><a href="mailto:r34lcg@gmail.com" accesskey="e">E-MAIL</a></li>
-	    <li><a href="https://chr1sgeorge.github.io/spotify/" accesskey="s">SPOTIFY</a></li>
-	    <li><a href="https://chr1sgeorge.github.io/watch-log/" accesskey="w">WATCH-LOG</a></li>
-	    
-        </ul>
-        <footer>
-		<img src="notepad.gif" alt="Animated GIF" width="150">
-	</footer>
+    <!-- Responsive Barrel-Distortion Clip Path (0 to 1 normalized coordinates) -->
+    <svg class="svg-defs" aria-hidden="true">
+        <defs>
+            <clipPath id="crt-barrel-clip" clipPathUnits="objectBoundingBox">
+                <path d="M 0.045,0.035 
+                         C 0.25,0.002 0.75,0.002 0.955,0.035 
+                         C 0.998,0.25 0.998,0.75 0.955,0.965 
+                         C 0.75,0.998 0.25,0.998 0.045,0.965 
+                         C 0.002,0.75 0.002,0.25 0.045,0.035 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <div class="crt-monitor">
+        <!-- Layered Curved Green CRT Tube Border -->
+        <svg class="crt-bezel-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+            <!-- Outer soft green phosphor bleed -->
+            <path d="M 45,35 C 250,2 750,2 955,35 C 998,250 998,750 955,965 C 750,998 250,998 45,965 C 2,750 2,250 45,35 Z"
+                  fill="none" stroke="rgba(0, 255, 65, 0.32)" stroke-width="14" vector-effect="non-scaling-stroke" />
+            <!-- Inner secondary scanline rim -->
+            <path d="M 52,42 C 252,11 748,11 948,42 C 989,252 989,748 948,958 C 748,989 252,989 52,958 C 11,748 11,252 52,42 Z"
+                  fill="none" stroke="rgba(0, 255, 65, 0.22)" stroke-width="2" vector-effect="non-scaling-stroke" />
+            <!-- Main crisp electric-green curved TV border -->
+            <path d="M 45,35 C 250,2 750,2 955,35 C 998,250 998,750 955,965 C 750,998 250,998 45,965 C 2,750 2,250 45,35 Z"
+                  fill="none" stroke="#00ff44" stroke-width="3.5" vector-effect="non-scaling-stroke" />
+        </svg>
+
+        <div class="screen-content">
+            <header></header>
+            <h1>CHRIS GEORGE</h1>
+            <h2>FOR THE LULZ</h2>
+            <blockquote>
+                &ldquo;I have found that all ugly things are made by those who strive to make something beautiful, and that all beautiful things are made by those who strive to make something useful.&rdquo;
+            </blockquote>
+            <ul>
+                <li><a href="https://chr1sgeorge.github.io/clickme/" accesskey="c">CLICK ME</a></li>
+                <li><a href="https://chr1sgeorge.github.io/offsocial/" accesskey="o">OFF-SOCIAL</a></li>
+                <li><a href="https://chr1sgeorge.github.io/music-archive/" accesskey="m">MUSIC-ARCHIVE</a></li>
+                <li><a href="https://chr1sgeorge.github.io/media-archive/" accesskey="f">FILM-ARCHIVE</a></li>
+                <li><a href="https://chr1sgeorge.github.io/pgp" accesskey="p">PGP</a></li>
+                <li><a href="mailto:r34lcg@gmail.com" accesskey="e">E-MAIL</a></li>
+                <li><a href="https://chr1sgeorge.github.io/spotify/" accesskey="s">SPOTIFY</a></li>
+                <li><a href="https://chr1sgeorge.github.io/watch-log/" accesskey="w">WATCH-LOG</a></li>
+            </ul>
+            <footer>
+                <img src="notepad.gif" alt="Created with Notepad" width="150">
+            </footer>
+        </div>
     </div>
 
     <script>
         document.addEventListener("keyup", function(event) {
             var code = (event.keyCode ? event.keyCode : event.which);
-        if (code == 67) {  // 'C' or 'c'
-                window.location = "https://chr1sgeorge.github.io/clickme";
-            }
-	    if (code == 79 || code == 111) {  // 'O' or 'o'
-				window.location = "https://chr1sgeorge.github.io/offsocial/";
-            }
-        if (code == 77 || code == 109) {  // 'M' or 'm'
-				window.location = "https://chr1sgeorge.github.io/music-archive/";
-            }
-        if (code == 80) {  // 'P' or 'p'
-                window.location = "https://chr1sgeorge.github.io/pgp";
-            }
-	    if (code == 69 || code == 101) {  // 'E' or 'e'
-                window.location = "mailto:r34lcg@gmail.com";
-	    	}
-	    if (code == 83) {  // 'S' or 's'
-                window.location = "https://chr1sgeorge.github.io/spotify/";
-	    	}
-			}
-		if (code == 70) {  // 'F' or 'f'
-   				window.location = "https://chr1sgeorge.github.io/media-archive";
-			}
-        if (code == 87) {  // 'W' or 'w'
-   				window.location = "https://chr1sgeorge.github.io/watch-log";
-			}
+            
+            if (code == 67) window.location = "https://chr1sgeorge.github.io/clickme";
+            if (code == 79 || code == 111) window.location = "https://chr1sgeorge.github.io/offsocial/";
+            if (code == 77 || code == 109) window.location = "https://chr1sgeorge.github.io/music-archive/";
+            if (code == 80) window.location = "https://chr1sgeorge.github.io/pgp";
+            if (code == 69 || code == 101) window.location = "mailto:r34lcg@gmail.com";
+            if (code == 83) window.location = "https://chr1sgeorge.github.io/spotify/";
+            if (code == 70) window.location = "https://chr1sgeorge.github.io/media-archive";
+            if (code == 87) window.location = "https://chr1sgeorge.github.io/watch-log";
         });
     </script>
 </body>
