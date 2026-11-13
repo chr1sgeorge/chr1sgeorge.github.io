@@ -45,12 +45,12 @@
         }
 
         @keyframes text-flicker {
-            0% { opacity: 0.985; }
-            50% { opacity: 1; }
-            100% { opacity: 0.985; }
+            0% { opacity: 0.98; }
+            50% { opacity: 0.995; }
+            100% { opacity: 0.98; }
         }
 
-        /* RESET & BASE - LOCKED NON-SCROLLABLE VIEWPORT */
+        /* RESET & BASE - NO SCROLL */
         * {
             margin: 0;
             padding: 0;
@@ -59,120 +59,91 @@
         }
         html, body {
             height: 100vh;
-            height: 100dvh;
             width: 100vw;
             overflow: hidden;
-            background-color: #000000;
+            background-color: #000000; /* Pure black outer background */
         }
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: clamp(8px, 2.5vmin, 32px);
+            padding: clamp(10px, 3vmin, 40px);
             -webkit-text-size-adjust: none;
         }
 
-        /* SVG DEFINITION HOLDER */
-        .svg-defs {
-            position: absolute;
-            width: 0;
-            height: 0;
-            pointer-events: none;
-        }
-
-        /* CURVED BARREL CRT MONITOR CONTAINER */
+        /* THE PHYSICAL CRT MONITOR CONTAINER */
         .crt-monitor {
             position: relative;
             width: 100%;
-            max-width: 1120px;
-            height: 100%;
-            max-height: 94dvh;
-            
-            /* Classic CRT Blue Center fading into dark tube edges */
-            background-color: #06134a;
-            background-image: radial-gradient(
-                ellipse at 50% 48%, 
-                #102fa3 0%, 
-                #081961 52%, 
-                #030929 84%, 
-                #010208 100%
-            );
-
-            /* True Barrel Distortion Clip Path (works on both Phone & PC aspect ratios) */
-            -webkit-clip-path: url(#crt-barrel-clip);
-            clip-path: url(#crt-barrel-clip);
-
+            max-width: 1100px;
+            height: 92vh;
+            background-color: #030406; /* Pitch black CRT background */
+            /* Curved Elliptical TV corners */
+            border-radius: clamp(30px, 10vmin, 80px) / clamp(20px, 6vmin, 50px);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: hidden;
         }
 
-        /* 4:3 TV Aspect Ratio on Desktop/Landscape */
-        @media (min-width: 768px) and (orientation: landscape) {
+        /* Lock to 4:3 Boxy Aspect Ratio on Desktop to prevent stretching */
+        @media (min-width: 768px) {
             .crt-monitor {
                 height: auto;
                 aspect-ratio: 4 / 3;
-                max-height: 92dvh;
+                max-height: 92vh;
             }
         }
 
-        /* CURVED GREEN CRT TUBE BORDER OVERLAY */
-        .crt-bezel-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            filter: drop-shadow(0 0 6px rgba(0, 255, 65, 0.75));
-        }
-
-        /* DARK EDGE VIGNETTE & CURVED GLASS REFLECTION */
+        /* THE SHARP GREEN CRT TUBE BORDER (Reference Image Match) */
         .crt-monitor::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(0, 0, 0, 0.55) 85%, rgba(0, 0, 0, 0.94) 100%),
-                radial-gradient(ellipse at 50% 14%, rgba(160, 220, 255, 0.09) 0%, transparent 55%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            /* Sharp green outer line fading into a heavy black inner vignette */
+            box-shadow: 
+                inset 0 0 0 clamp(1px, 0.3vmin, 3px) rgba(0, 255, 60, 1), /* The ultra-thin sharp green edge */
+                inset 0 0 clamp(8px, 1.5vmin, 16px) rgba(0, 255, 60, 0.4), /* Subtle green outer glow */
+                inset 0 0 clamp(60px, 12vmin, 200px) clamp(20px, 5vmin, 80px) rgba(0, 0, 0, 0.98); /* Heavy black inner shadow */
             pointer-events: none;
-            z-index: 8;
+            z-index: 10; /* Keeps the heavy dark vignette OVER the text edges */
         }
 
-        /* CRT SCANLINES (Sits BELOW text so text stays bright and crisp) */
+        /* HEAVY SCANLINES & GLASS REFLECTION */
         .crt-monitor::after {
             content: "";
             position: absolute;
-            inset: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.36) 50%);
-            background-size: 100% 3px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.55) 50%), /* Hard scanlines */
+                radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 60%); /* Subtle glass bulb reflection */
+            background-size: 100% 3px, 100% 100%;
             pointer-events: none;
-            z-index: 4;
+            z-index: 4; /* Scanlines sit strictly BELOW the text now */
         }
 
-        /* INNER CONTENT WRAPPER */
+        /* INNER CONTENT WRAPPER - Fixed fading by moving above scanlines */
         .screen-content {
             position: relative;
-            z-index: 6;
-            /* Safe padding inside the curved barrel corners for both phone & PC */
-            padding: clamp(26px, 6.5vmin, 78px) clamp(24px, 7.5vmin, 92px);
+            z-index: 5; /* This ensures the text pops over the scanlines */
+            padding: clamp(30px, 8vmin, 90px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: 100%;
-            animation: text-flicker 0.16s infinite;
+            animation: text-flicker 0.15s infinite;
         }
 
-        /* TYPOGRAPHY & CURVED GLASS CHROMATIC ABERRATION */
+        /* TYPOGRAPHY - Chromatic Aberration for Curved Glass Effect */
         header, h1, h2, blockquote, ul, li, footer {
             font-family: "C64 User Mono", "Press Start 2P", "VT323", monospace;
             font-weight: normal;
             text-transform: uppercase;
-            /* Scales proportionally to both screen height and width so nothing wraps or overflows */
-            font-size: clamp(0.5rem, min(2.05vh, 2.35vw), 1.45rem);
-            line-height: 1.42;
-            letter-spacing: 0.02em;
+            font-size: clamp(0.5rem, 2.2vmin, 1.6rem);
+            line-height: 1.45;
+            letter-spacing: 0.03em;
         }
 
         header:before, h1:after {
@@ -180,16 +151,15 @@
             display: block;
         }
 
-        /* Top Boot Banner - Slightly bowed upward to echo the top TV curve */
+        /* Top Boot Banner */
         header {
-            color: #ff9442;
+            color: #ff8c3b;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 0, 40, 0.65),
-                1.5px 0 1px rgba(0, 180, 255, 0.65),
-                0 0 10px rgba(255, 115, 30, 0.8);
+                -2px 0 1px rgba(255, 0, 0, 0.7),
+                2px 0 1px rgba(0, 150, 255, 0.7),
+                0 0 10px rgba(255, 110, 30, 0.7);
             text-align: center;
-            margin-bottom: clamp(0.7rem, 2.6vmin, 1.8rem);
-            transform: perspective(600px) rotateX(6deg);
+            margin-bottom: clamp(0.8rem, 3vmin, 2rem);
         }
         header:before {
             content: "**** FREE THE INTERNET **** /\A\A 64K RAM SYSTEM  38911  COMMODORE 64 BASIC V2";
@@ -197,34 +167,34 @@
 
         /* Title */
         h1 {
-            color: #ffa347;
+            color: #ff9d3b;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 0, 40, 0.65),
-                1.5px 0 1px rgba(0, 180, 255, 0.65),
-                0 0 10px rgba(255, 140, 40, 0.8);
+                -2px 0 1px rgba(255, 0, 0, 0.7),
+                2px 0 1px rgba(0, 150, 255, 0.7),
+                0 0 10px rgba(255, 140, 40, 0.7);
         }
         h1:after {
             content: "------------";
-            color: #ffa347;
-            margin-bottom: clamp(0.2rem, 1.2vmin, 0.5rem);
+            color: #ff9d3b;
+            margin-bottom: clamp(0.2rem, 1.5vmin, 0.6rem);
         }
 
         /* Subtitle & Quote */
         h2 {
-            color: #94ffff;
+            color: #8affff;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 0, 60, 0.45),
-                1.5px 0 1px rgba(0, 140, 255, 0.7),
-                0 0 10px rgba(100, 255, 255, 0.8);
+                -2px 0 1px rgba(255, 0, 0, 0.5),
+                2px 0 1px rgba(0, 100, 255, 0.7),
+                0 0 10px rgba(100, 255, 255, 0.7);
             margin-top: 0;
         }
         blockquote {
-            color: #94ffff;
+            color: #8affff;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 0, 60, 0.45),
-                1.5px 0 1px rgba(0, 140, 255, 0.7),
-                0 0 10px rgba(100, 255, 255, 0.8);
-            margin: 0 0 clamp(0.8rem, 3vmin, 2.1rem) 0;
+                -2px 0 1px rgba(255, 0, 0, 0.5),
+                2px 0 1px rgba(0, 100, 255, 0.7),
+                0 0 10px rgba(100, 255, 255, 0.7);
+            margin: 0 0 clamp(1rem, 3.5vmin, 2.5rem) 0;
             max-width: 55ch;
         }
 
@@ -233,15 +203,15 @@
             list-style: none;
             display: flex;
             flex-direction: column; 
-            gap: clamp(0.18em, 0.9vmin, 0.38em); 
-            margin-bottom: clamp(0.8rem, 3vmin, 2.1rem);
+            gap: clamp(0.2em, 1vmin, 0.4em); 
+            margin-bottom: clamp(1rem, 3.5vmin, 2.5rem);
         }
         li {
-            color: #ffe45e;
+            color: #ffe14d;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 20, 0, 0.55),
-                1.5px 0 1px rgba(0, 170, 255, 0.55),
-                0 0 10px rgba(255, 215, 40, 0.8);
+                -2px 0 1px rgba(255, 0, 0, 0.6),
+                2px 0 1px rgba(0, 150, 255, 0.6),
+                0 0 10px rgba(255, 215, 40, 0.7);
             white-space: nowrap;
         }
         li:nth-child(1):before { content: "[C]:"; }
@@ -255,27 +225,26 @@
         li:nth-child(9):before { content: "[T]:"; }
 
         a {
-            color: #ffe45e;
+            color: #ffe14d;
             text-decoration: none;
             transition: color 0.15s ease, text-shadow 0.15s ease, padding-left 0.15s ease;
         }
         a:hover {
             color: #ffffff;
-            text-shadow: 0 0 12px #ffffff, 0 0 24px #ffe45e;
+            text-shadow: 0 0 12px #ffffff, 0 0 24px #ffe14d;
             padding-left: 8px;
         }
 
-        /* Footer - Slightly bowed downward to echo the bottom TV curve */
+        /* Footer */
         footer {
             display: flex !important;
             justify-content: space-between;
             align-items: flex-end;
-            color: #ffe45e;
+            color: #ffe14d;
             text-shadow: 
-                -1.5px 0 1px rgba(255, 20, 0, 0.55),
-                1.5px 0 1px rgba(0, 170, 255, 0.55),
-                0 0 10px rgba(255, 215, 40, 0.8);
-            transform: perspective(600px) rotateX(-5deg);
+                -2px 0 1px rgba(255, 0, 0, 0.6),
+                2px 0 1px rgba(0, 150, 255, 0.6),
+                0 0 10px rgba(255, 215, 40, 0.7);
         }
         footer:before {
             content: "?SYNTAX ERROR /\A READY.";
@@ -285,51 +254,25 @@
         footer img {
             display: block;
             margin: 0;
-            width: clamp(64px, 12vmin, 140px);
+            width: clamp(70px, 13vmin, 150px);
             height: auto;
-            filter: drop-shadow(0 0 6px rgba(138, 255, 255, 0.45));
+            filter: drop-shadow(0 0 6px rgba(138, 255, 255, 0.4));
         }
 
         ::selection {
             background: #00ff3c;
-            color: #02071e;
+            color: #000000;
             text-shadow: none;
         }
         ::-moz-selection {
             background: #00ff3c;
-            color: #02071e;
+            color: #000000;
             text-shadow: none;
         }
     </style>
 </head>
 <body>
-    <!-- Responsive Barrel-Distortion Clip Path (0 to 1 normalized coordinates) -->
-    <svg class="svg-defs" aria-hidden="true">
-        <defs>
-            <clipPath id="crt-barrel-clip" clipPathUnits="objectBoundingBox">
-                <path d="M 0.045,0.035 
-                         C 0.25,0.002 0.75,0.002 0.955,0.035 
-                         C 0.998,0.25 0.998,0.75 0.955,0.965 
-                         C 0.75,0.998 0.25,0.998 0.045,0.965 
-                         C 0.002,0.75 0.002,0.25 0.045,0.035 Z" />
-            </clipPath>
-        </defs>
-    </svg>
-
     <div class="crt-monitor">
-        <!-- Layered Curved Green CRT Tube Border -->
-        <svg class="crt-bezel-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            <!-- Outer soft green phosphor bleed -->
-            <path d="M 45,35 C 250,2 750,2 955,35 C 998,250 998,750 955,965 C 750,998 250,998 45,965 C 2,750 2,250 45,35 Z"
-                  fill="none" stroke="rgba(0, 255, 65, 0.32)" stroke-width="14" vector-effect="non-scaling-stroke" />
-            <!-- Inner secondary scanline rim -->
-            <path d="M 52,42 C 252,11 748,11 948,42 C 989,252 989,748 948,958 C 748,989 252,989 52,958 C 11,748 11,252 52,42 Z"
-                  fill="none" stroke="rgba(0, 255, 65, 0.22)" stroke-width="2" vector-effect="non-scaling-stroke" />
-            <!-- Main crisp electric-green curved TV border -->
-            <path d="M 45,35 C 250,2 750,2 955,35 C 998,250 998,750 955,965 C 750,998 250,998 45,965 C 2,750 2,250 45,35 Z"
-                  fill="none" stroke="#00ff44" stroke-width="3.5" vector-effect="non-scaling-stroke" />
-        </svg>
-
         <div class="screen-content">
             <header></header>
             <h1>CHRIS GEORGE</h1>
