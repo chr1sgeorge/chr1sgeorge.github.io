@@ -176,6 +176,11 @@
             color: #ffe14d;
             text-shadow: 0 0 8px rgba(255, 215, 40, 0.85), 0 0 14px rgba(255, 160, 0, 0.45);
             white-space: nowrap;
+            align-self: flex-start;
+            width: fit-content;
+            padding: 0 0.12em;
+            margin-left: -0.12em;
+            transition: color 0.12s ease, background-color 0.12s ease, text-shadow 0.12s ease;
         }
         li:nth-child(1):before { content: "[C]:"; }
         li:nth-child(2):before { content: "[O]:"; }
@@ -188,14 +193,25 @@
         li:nth-child(9):before { content: "[T]:"; }
 
         a {
-            color: #ffe14d;
+            color: inherit;
             text-decoration: none;
-            transition: color 0.15s ease, text-shadow 0.15s ease, padding-left 0.15s ease;
         }
-        a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffe14d;
-            padding-left: 8px;
+
+        /* One crisp BBS selection bar for the shortcut label and link together. */
+        li:hover,
+        li:has(a:focus-visible),
+        li.key-active {
+            color: #06134a;
+            background-color: #ffe14d;
+            text-shadow: none;
+            box-shadow: none;
+        }
+
+        li:hover a,
+        li:has(a:focus-visible) a,
+        li.key-active a {
+            color: #06134a;
+            text-shadow: none;
         }
 
         /* Footer */
@@ -257,31 +273,29 @@
 
     <script>
         document.addEventListener("keyup", function(event) {
-            var code = (event.keyCode ? event.keyCode : event.which);
-            if (code == 67) {  // 'C' or 'c'
-                window.location = "https://chr1sgeorge.github.io/clickme";
-            }
-            if (code == 79 || code == 111) {  // 'O' or 'o'
-                window.location = "https://chr1sgeorge.github.io/offsocial/";
-            }
-            if (code == 77 || code == 109) {  // 'M' or 'm'
-                window.location = "https://chr1sgeorge.github.io/music-archive/";
-            }
-            if (code == 80) {  // 'P' or 'p'
-                window.location = "https://chr1sgeorge.github.io/pgp";
-            }
-            if (code == 69 || code == 101) {  // 'E' or 'e'
-                window.location = "mailto:r34lcg@gmail.com";
-            }
-            if (code == 83) {  // 'S' or 's'
-                window.location = "https://chr1sgeorge.github.io/spotify/";
-            }
-            if (code == 70) {  // 'F' or 'f'
-                window.location = "https://chr1sgeorge.github.io/media-archive";
-            }
-            if (code == 87) {  // 'W' or 'w'
-                window.location = "https://chr1sgeorge.github.io/watch-log";
-            }
+            if (event.ctrlKey || event.altKey || event.metaKey) return;
+
+            var shortcuts = {
+                c: { item: 1, url: "https://chr1sgeorge.github.io/clickme" },
+                o: { item: 2, url: "https://chr1sgeorge.github.io/offsocial/" },
+                m: { item: 3, url: "https://chr1sgeorge.github.io/music-archive/" },
+                f: { item: 4, url: "https://chr1sgeorge.github.io/media-archive" },
+                p: { item: 5, url: "https://chr1sgeorge.github.io/pgp" },
+                e: { item: 6, url: "mailto:r34lcg@gmail.com" },
+                s: { item: 7, url: "https://chr1sgeorge.github.io/spotify/" },
+                w: { item: 8, url: "https://chr1sgeorge.github.io/watch-log" }
+            };
+
+            var shortcut = shortcuts[event.key.toLowerCase()];
+            if (!shortcut) return;
+
+            var item = document.querySelector("ul li:nth-child(" + shortcut.item + ")");
+            if (item) item.classList.add("key-active");
+
+            // Show the same selection bar briefly before following the shortcut.
+            window.setTimeout(function() {
+                window.location.href = shortcut.url;
+            }, 160);
         });
     </script>
 </body>
