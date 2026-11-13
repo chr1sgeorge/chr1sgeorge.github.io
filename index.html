@@ -140,6 +140,18 @@
             content: "**** FREE THE INTERNET **** /\A\A 64K RAM SYSTEM  38911  COMMODORE 64 BASIC V2";
         }
 
+        /* Keep the boot text inside the CRT width on narrow phone screens. */
+        @media (max-width: 600px) {
+            header {
+                text-align: left;
+            }
+            header:before {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere;
+                max-width: 100%;
+            }
+        }
+
         /* Title */
         h1 {
             color: #ff9d3b;
