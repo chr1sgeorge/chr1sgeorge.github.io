@@ -10,9 +10,6 @@
     <meta property="og:description" content="for the lulz">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <style type="text/css" media="print">
         blockquote { font-style: italic; }
@@ -30,7 +27,6 @@
     </style>
 
     <style type="text/css">
-        /* FONT SOURCE */
         @font-face {
             font-family: "C64 User Mono";
             src: url("fonts/C64_Pro_Mono-STYLE.eot");
@@ -44,13 +40,11 @@
             font-style: normal;
         }
 
-        /* KEYFRAME ANIMATIONS */
         @keyframes subtle-pulse {
             0%, 100% { box-shadow: 0 0 clamp(10px, 2vmin, 20px) rgba(138, 255, 255, 0.2), inset 0 0 clamp(30px, 6vmin, 100px) rgba(0, 0, 0, 0.95); }
             50% { box-shadow: 0 0 clamp(20px, 4vmin, 40px) rgba(138, 255, 255, 0.4), inset 0 0 clamp(30px, 6vmin, 100px) rgba(0, 0, 0, 0.95); }
         }
 
-        /* RESET & BASE - SCROLLING DISABLED */
         * {
             margin: 0;
             padding: 0;
@@ -58,9 +52,9 @@
             box-sizing: border-box;
         }
         html, body {
-            height: 100vh; /* Locked to exact screen height */
+            height: 100vh;
             width: 100vw;
-            overflow: hidden; /* Prevents scrollbars */
+            overflow: hidden;
         }
         body {
             background-color: #02040a;
@@ -68,11 +62,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: clamp(10px, 2.5vmin, 30px); /* Acts as the physical monitor bezel */
+            padding: clamp(10px, 2.5vmin, 30px); 
             -webkit-text-size-adjust: none;
         }
-
-        /* OUTER BBS TERMINAL MARQUEE & INNER CRT SCREEN */
+        
         .crt-frame {
             display: flex !important;
             flex-direction: column;
@@ -81,7 +74,7 @@
             visibility: visible !important;
             position: relative !important;
             
-            /* Expands to fill the device browser perfectly */
+            
             width: 100%;
             height: 100%;
             max-width: 1600px; 
@@ -91,12 +84,12 @@
             border-radius: clamp(12px, 3vmin, 30px);
             padding: clamp(20px, 5vmin, 60px) clamp(20px, 6vmin, 80px);
             
-            /* Classic BBS Double-Line Glow Border */
+            
             border: clamp(6px, 1.5vmin, 18px) double #8affff;
             animation: subtle-pulse 4s infinite ease-in-out;
         }
 
-        /* Subtle CRT Scanlines & Tube Vignette */
+        
         .crt-frame::after {
             content: "";
             position: absolute;
@@ -110,7 +103,7 @@
             z-index: 4;
         }
 
-        /* TYPOGRAPHY & COLORS */
+        
         header, h1, h2, blockquote, ul, li, footer {
             font-family: "C64 User Mono", "Press Start 2P", "VT323", monospace;
             font-weight: normal;
@@ -118,7 +111,7 @@
             position: relative;
             z-index: 6;
             
-            /* Significantly larger max font size to fill desktop monitors */
+            
             font-size: clamp(0.5rem, 2.4vmin, 1.8rem);
             line-height: 1.4;
             letter-spacing: 0.02em;
@@ -129,7 +122,7 @@
             display: block;
         }
 
-        /* Top Boot Banner */
+        
         header {
             color: #ff8c3b;
             text-shadow: 0 0 8px rgba(255, 110, 30, 0.85), 0 0 16px rgba(255, 60, 0, 0.5);
@@ -140,7 +133,7 @@
             content: "**** FREE THE INTERNET **** /\A\A 64K RAM SYSTEM  38911  COMMODORE 64 BASIC V2";
         }
 
-        /* Keep the boot text inside the CRT width on narrow phone screens. */
+        
         @media (max-width: 600px) {
             header {
                 text-align: left;
@@ -152,7 +145,7 @@
             }
         }
 
-        /* Title */
+        
         h1 {
             color: #ff9d3b;
             text-shadow: 0 0 8px rgba(255, 140, 40, 0.85), 0 0 14px rgba(255, 80, 0, 0.45);
@@ -163,7 +156,7 @@
             margin-bottom: clamp(0.2rem, 1.5vmin, 0.6rem);
         }
 
-        /* Subtitle & Quote */
+        
         h2 {
             color: #8affff;
             text-shadow: 0 0 8px rgba(100, 255, 255, 0.85), 0 0 16px rgba(0, 210, 255, 0.55);
@@ -176,7 +169,7 @@
             max-width: 55ch;
         }
 
-        /* 1-Column Navigation Menu */
+        
         ul {
             list-style: none;
             display: flex;
@@ -209,7 +202,7 @@
             text-decoration: none;
         }
 
-        /* One crisp BBS selection bar for the shortcut label and link together. */
+        
         li:hover,
         li:has(a:focus-visible),
         li.key-active {
@@ -226,7 +219,7 @@
             text-shadow: none;
         }
 
-        /* Footer */
+        
         footer {
             display: flex !important;
             justify-content: space-between;
@@ -264,7 +257,7 @@
     <div class="crt-frame">
         <header></header>
         <h1>CHRIS GEORGE</h1>
-        <h2>FOR THE LULZ</h2>
+        <h2>FOR THE LULZ</h2><br>
         <blockquote>
             &ldquo;I have found that all ugly things are made by those who strive to make something beautiful, and that all beautiful things are made by those who strive to make something useful.&rdquo;
         </blockquote>
@@ -304,7 +297,7 @@
             var item = document.querySelector("ul li:nth-child(" + shortcut.item + ")");
             if (item) item.classList.add("key-active");
 
-            // Show the same selection bar briefly before following the shortcut.
+            
             window.setTimeout(function() {
                 window.location.href = shortcut.url;
             }, 160);
